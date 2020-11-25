@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MatcheADAs G5</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+
+    <div class="estructura">
+        <h1 class="matcheadas"> MATCHEADAS </h1>
+        <div class="barra">
+            <div class="puntos">
+                <p>
+                    Combo x1
+                </p>
+                <p>
+                    Puntos : 0
+                </p>
+            </div>
+            <div class="estilo-botones-barra">
+                <button class="boton ayuda">
+                    <i class="fas fa-info-circle"></i>
+                </button>
+                <button class="boton restart">
+                    <i class="fas fa-redo-alt"></i>
+                </button>
+            </div>
+
+        </div>
+        <div class="dialogo juego-terminado">
+            <div class="dialogo-botones">
+                <button id="nuevo-juego">Nuevo Juego</button>
+                <button id="reiniciar-juego">Reiniciar Juego</button>
+
+            </div>
+            <div class="dialogo-dificultad">
+                <div class="dialogo-botones">
+                    <button id="facil" class="ocultar">Facil</button>
+                    <button id="medio" class="ocultar">Medio</button>
+                    <button id="dificil" class="ocultar">Dificil</button>
+                </div>
+
+            </div>
+            <div class="matches">
+            </div>
+
+            <button id="buscar-matches">Buscar Matches</button>
+        </div>
+
+
+        <div id="grilla" class="grilla"></div>
+    </div>
+
+
+
+    <script src="index.js"></script>
+</body>
+
+</html>
