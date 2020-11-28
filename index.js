@@ -1,4 +1,5 @@
 const grillaHTML = document.querySelector("#grilla")
+const dialogoNuevoJuego = document.querySelector(".dialogo.nuevo-juego")
 const botonNuevoJuego = document.querySelector("#boton-nuevo-juego")
 const botonReiniciarJuego = document.querySelector("#boton-reiniciar-juego")
 const botonBuscarMatch = document.querySelector("#boton-buscar-match")
@@ -8,25 +9,49 @@ const botonModoDificil = document.querySelector("#boton-modo-dificil")
 const mosaicos = document.getElementsByClassName('mosaico')
 const items = ['🍉', '🥝', '🍌', '🍇', '🍋', '🥥']
 
-//alert('Bienvenidx') //la comento para poder trabajar mas tranquila
+//Comportamiento general de modales
+const abrirModal = (elemento) => {
+    elemento.classList.remove('hiden')
+    overlay.classList.remove('hidden')
+}
 
+const cerrarModal = (elemento) => {
+    elemento.classList.add('hiden')
+    overlay.classList.add('hiden')
+
+}
+
+//Almaceno niveles de dificultad para reutilizar luego
+const grillaFacil = () => {
+    generarGrilla(9, 9)
+    generarGrillaEnHTML(9, 9, items)
+}
+
+const grillaNormal = () => {
+    generarGrilla(8, 8)
+    generarGrillaEnHTML(8, 8, items)
+}
+
+const grillaDificil = () => {
+    generarGrilla(7, 7)
+    generarGrillaEnHTML(7, 7, items)
+}
 
 //Pedir al usuario que elija la dificultad de la partida
-
-let dificultad = ''
+let nivelDificultad = ''
 botonModoFacil.onclick = () => {
-    dificultad = 9
-    return generarGrilla(9, 9)
+    grillaFacil()
+    nivelDificultad = 'facil'
 }
 
 botonModoNormal.onclick = () => {
-    dificultad = 8
-    return generarGrilla(8, 8)
+    grillaNormal()
+    nivelDificultad = 'normal'
 }
 
 botonModoDificil.onclick = () => {
-    dificultad = 7
-    return generarGrilla(7, 7)
+    grillaDificil()
+    nivelDificultad = 'dificil'
 }
 
 // Crear una grilla en JS y en HTML con items aleatorios 
@@ -40,12 +65,12 @@ const obtenerItemAlAzar = items => {
 }
 
 let grilla = []
-const generarGrilla = () => {
+const generarGrilla = (filas, columnas) => {
 
     grilla = []
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < filas; i++) {
         grilla[i] = []
-        for (let j = 0; j < 10; j++) {
+        for (let j = 0; j < columnas; j++) {
             grilla[i][j] = obtenerItemAlAzar(items)
         }
     }
@@ -65,8 +90,8 @@ const generarMosaicos = (x, y, array) => {
     return mosaico
 }
 
-const generarGrillaEnHTML = () => {
-    const anchoDeGrilla = 50 * 10
+const generarGrillaEnHTML = (filas, columnas, items) => {
+    const anchoDeGrilla = 50 * columnas
     grillaHTML.style.width = `${anchoDeGrilla}px`
     const listadeItems = grilla;
     for (let i = 0; i < listadeItems.length; i++) {
@@ -88,13 +113,26 @@ generarGrillaEnHTML()
 // //Opciones nuevo juego
 
 botonNuevoJuego.onclick = () => {
-    
-}
-
-botonReiniciarJuego.onclick = () => {
-    
+    console.log(dialogoNuevoJuego)
 }
 // //-----------------------------------------
+
+botonReiniciarJuego.onclick = () => {
+    grillaHTML.textContent = ''
+    revisarDificultadElegida()
+}
+
+const revisarDificultadElegida = () => {
+    if (nivelDificultad === 'facil') {
+        grillaFacil()
+    }
+    else if (nivelDificultad === 'normal') {
+        grillaNormal()
+    }
+    else if (nivelDificultad === 'dificil') {
+        grillaDificil()
+    }
+}
 
 
 
