@@ -1,7 +1,7 @@
 
 body{
    
-    background-image: url(./imagenes/background2.jpg);
+    background-image: url(./imagenes/background.jpg);
     
         display: flex;
         justify-content: center;
@@ -10,6 +10,8 @@ body{
         background-position-y: 30%;
         background-position-x: 30%
         padding: 0 10px;
+        background-position-x: 30% ;
+        padding : 0 10px;
         user-select: none;
         position: relative;
         background-repeat: no-repeat;
@@ -56,6 +58,7 @@ display: flex;
     align-items: center;
 }
 
+
 .juego-terminado{
     display: flex;
     background-color: brown;
@@ -73,6 +76,10 @@ display: flex;
 .estilo-botones-barra{
 
 }
+
+/* .botones-barra{
+
+} */
 
 .boton
 {
