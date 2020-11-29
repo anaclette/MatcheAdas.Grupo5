@@ -1,6 +1,30 @@
 body {
-    background-image: url(./imagenes/background.jpg);
+    background-image: url(./imagenes/background2.jpg);
     display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-position-y: 30%;
+    background-position-x: 30%;
+    padding: 0 10px;
+    background-position-x: 30%;
+    padding: 0 10px;
+    user-select: none;
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* ---------------- ESTILOS GRILLA ------------------ */
+
+.grilla {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: rgba(25, 0, 0, 0.5);
+    display: flex;
+}
+
+.estructura {
     justify-content: center;
     align-items: center;
     background-size: cover;
