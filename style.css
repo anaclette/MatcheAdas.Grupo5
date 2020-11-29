@@ -1,7 +1,7 @@
 
 body{
    
-    background-image: url(./imagenes/background2.jpg);
+    background-image: url(./imagenes/background.jpg);
     
         display: flex;
         justify-content: center;
@@ -55,22 +55,7 @@ display: flex;
     justify-content: space-between;
     align-items: center;
 }
-
-.juego-terminado{
-    display: flex;
-    background-color: brown;
-}
-
-.dialogo-dificultad{
-    display: flex;
-    background-color: coral;
-}
-
-.dialogo-botones{
-    display: flex;
-    background-color: cornflowerblue;
-}
-.estilo-botones-barra{
+.botones-barra{
 
 }
 

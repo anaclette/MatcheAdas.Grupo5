@@ -6,7 +6,7 @@ const botonModoFacil = document.querySelector("#boton-modo-facil")
 const botonModoNormal = document.querySelector("#boton-modo-normal")
 const botonModoDificil = document.querySelector("#boton-modo-dificil")
 const mosaicos = document.getElementsByClassName('mosaico')
-const items = ['🍉', '🥝', '🍌', '🍇', '🍋', '🥥']
+const items = ['🦝', '🦊', '🐺', '🍁', '🌲', '🍄', '🐻', '🐦', '🐨',]
 
 //alert('Bienvenidx') //la comento para poder trabajar mas tranquila
 
