@@ -7,7 +7,7 @@ const botonModoFacil = document.querySelector("#boton-modo-facil")
 const botonModoNormal = document.querySelector("#boton-modo-normal")
 const botonModoDificil = document.querySelector("#boton-modo-dificil")
 const mosaicos = document.getElementsByClassName('mosaico')
-const items = ['🦝', '🦊', '🐺', '🍁', '🌲', '🍄', '🐻', '🐦', '🐨',]
+const items = ['🍉', '🥝', '🍌', '🍇', '🍋', '🥥']
 
 //Comportamiento general de modales
 const abrirModal = (elemento) => {
@@ -22,11 +22,8 @@ const cerrarModal = (elemento) => {
 }
 
 
-
 //Pedir al usuario que elija la dificultad de la partida
 let nivelDificultad = '' //Almaceno niveles de dificultad para reutilizar luego
-
-
 
 botonModoFacil.onclick = () => {
     grillaFacil()
