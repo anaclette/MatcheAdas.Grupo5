@@ -7,13 +7,9 @@ const botonModoFacil = document.querySelector("#boton-modo-facil")
 const botonModoNormal = document.querySelector("#boton-modo-normal")
 const botonModoDificil = document.querySelector("#boton-modo-dificil")
 const mosaicos = document.getElementsByClassName('mosaico')
-<<<<<<< HEAD
-const items = ['🐺', '🦊', '🦝 ', '🐻 ', '🐨 ', '🐦','🍄','🌲','🍁',]
+const items = ['🐺', '🦊', '🦝 ', '🐻 ', '🐨 ', '🐦', '🍄', '🌲', '🍁',]
 console.log(items)
 
-=======
-const items = ['🍉', '🥝', '🍌', '🍇', '🍋', '🥥']
->>>>>>> f0fd8bf16da2c5d2eed57f2d7a24b791ea3b869d
 
 //Comportamiento general de modales
 const abrirModal = (elemento) => {
@@ -27,33 +23,13 @@ const cerrarModal = (elemento) => {
 
 }
 
-<<<<<<< HEAD
-//Pedir al usuario que elija la dificultad de la partida
-
-// let dificultad = ''
-// botonModoFacil.onclick = () => {
-//     dificultad = 9
-//     return generarGrilla(9, 9)
-// }
-
-// botonModoNormal.onclick = () => {
-//     dificultad = 8
-//     return generarGrilla(8, 8)
-// }
-
-// botonModoDificil.onclick = () => {
-//     dificultad = 7
-//     return generarGrilla(7, 7)
-// }
-=======
-
 //Pedir al usuario que elija la dificultad de la partida
 let nivelDificultad = '' //Almaceno niveles de dificultad para reutilizar luego
 
 botonModoFacil.onclick = () => {
     grillaFacil()
     cuentaRegresiva()
-    nivelDificultad = 'facil' 
+    nivelDificultad = 'facil'
 }
 
 botonModoNormal.onclick = () => {
@@ -78,33 +54,32 @@ const cuentaRegresiva = () => {
     }
     console.log(tiempoRestante)
 }
->>>>>>> f0fd8bf16da2c5d2eed57f2d7a24b791ea3b869d
 
 // Crear una grilla en JS y en HTML con items aleatorios 
 // Si hay matches, volver a generar una grilla
 
 const grillaFacil = () => {
     do {
-    vaciarGrillaHTML()
-    generarGrilla(9, 9)
-    generarGrillaEnHTML(9, 9, items)
-    } while(hayMatchInicial())
+        vaciarGrillaHTML()
+        generarGrilla(9, 9)
+        generarGrillaEnHTML(9, 9, items)
+    } while (hayMatchInicial())
 }
 
 const grillaNormal = () => {
     do {
-    vaciarGrillaHTML()
-    generarGrilla(8, 8)
-    generarGrillaEnHTML(8, 8, items)
-    } while(hayMatchInicial())
+        vaciarGrillaHTML()
+        generarGrilla(8, 8)
+        generarGrillaEnHTML(8, 8, items)
+    } while (hayMatchInicial())
 }
 
 const grillaDificil = () => {
     do {
-    vaciarGrillaHTML()
-    generarGrilla(7, 7)
-    generarGrillaEnHTML(7, 7, items)
-    } while(hayMatchInicial())
+        vaciarGrillaHTML()
+        generarGrilla(7, 7)
+        generarGrillaEnHTML(7, 7, items)
+    } while (hayMatchInicial())
 }
 
 
