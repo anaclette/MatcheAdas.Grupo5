@@ -27,17 +27,31 @@ let nivelDificultad = '' //Almaceno niveles de dificultad para reutilizar luego
 
 botonModoFacil.onclick = () => {
     grillaFacil()
+    cuentaRegresiva()
     nivelDificultad = 'facil' 
 }
 
 botonModoNormal.onclick = () => {
     grillaNormal()
+    cuentaRegresiva()
     nivelDificultad = 'normal'
 }
 
 botonModoDificil.onclick = () => {
     grillaDificil()
+    cuentaRegresiva()
     nivelDificultad = 'dificil'
+}
+
+//Empezar cuenta regresiva al crear un juego nuevo --------FUNCIONA JS, FALTA EL MAQUETADO DEL TIMER PARA PODER CONECTARLOS----
+let tiempoRestante = 30
+
+const cuentaRegresiva = () => {
+    tiempoRestante--
+    if (tiempoRestante > 0) {
+        setTimeout(cuentaRegresiva, 1000)
+    }
+    console.log(tiempoRestante)
 }
 
 // Crear una grilla en JS y en HTML con items aleatorios 
@@ -156,6 +170,7 @@ botonNuevoJuego.onclick = () => {
     console.log(dialogoNuevoJuego)
 }
 // //-----------------------------------------
+
 const vaciarGrillaHTML = () => {
     grillaHTML.textContent = ''
 }
@@ -209,3 +224,7 @@ for (let mosaico of mosaicos) {
 // obtener la cantidad de posciones vacias que tiene debajo
 // bajar el item esas pisiciones
 // rellenar posiciones restantes (las de mas arriba) con elementos al azar
+
+
+
+
