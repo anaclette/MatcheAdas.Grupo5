@@ -21,27 +21,13 @@ const cerrarModal = (elemento) => {
 
 }
 
-//Almaceno niveles de dificultad para reutilizar luego
-const grillaFacil = () => {
-    generarGrilla(9, 9)
-    generarGrillaEnHTML(9, 9, items)
-}
-
-const grillaNormal = () => {
-    generarGrilla(8, 8)
-    generarGrillaEnHTML(8, 8, items)
-}
-
-const grillaDificil = () => {
-    generarGrilla(7, 7)
-    generarGrillaEnHTML(7, 7, items)
-}
 
 //Pedir al usuario que elija la dificultad de la partida
-let nivelDificultad = ''
+let nivelDificultad = '' //Almaceno niveles de dificultad para reutilizar luego
+
 botonModoFacil.onclick = () => {
     grillaFacil()
-    nivelDificultad = 'facil'
+    nivelDificultad = 'facil' 
 }
 
 botonModoNormal.onclick = () => {
@@ -55,6 +41,31 @@ botonModoDificil.onclick = () => {
 }
 
 // Crear una grilla en JS y en HTML con items aleatorios 
+// Si hay matches, volver a generar una grilla
+const grillaFacil = () => {
+    do {
+    vaciarGrillaHTML()
+    generarGrilla(9, 9)
+    generarGrillaEnHTML(9, 9, items)
+    } while(hayMatchInicial())
+}
+
+const grillaNormal = () => {
+    do {
+    vaciarGrillaHTML()
+    generarGrilla(8, 8)
+    generarGrillaEnHTML(8, 8, items)
+    } while(hayMatchInicial())
+}
+
+const grillaDificil = () => {
+    do {
+    vaciarGrillaHTML()
+    generarGrilla(7, 7)
+    generarGrillaEnHTML(7, 7, items)
+    } while(hayMatchInicial())
+}
+
 
 const obtenerNumeroAlAzar = items => {
     return Math.floor((Math.random() * items.length))
@@ -104,10 +115,38 @@ const generarGrillaEnHTML = (filas, columnas, items) => {
 generarGrilla()
 generarGrillaEnHTML()
 
-//--------------FALTA HACER----------------
-// loop      // Chequeamos que si hay matches
-// Si hay matches, volvemos a generar una grilla
-//-----------------------------------------
+// Chequeamos si hay matches al inicio
+const hayMatchVertical = () => {
+    for (let i = 0; i < grilla.length; i++) {
+        for (let j = 0; j < grilla[i].length; j++) {
+            if (grilla[i + 1] && grilla[i + 2] && grilla[i][j] === grilla[i + 1][j] && grilla[i][j] === grilla[i + 2][j]) {
+                return true
+            }
+        }
+    }
+    return false
+}
+
+const hayMatchHorizontal = () => {
+    for (let i = 0; i < grilla.length; i++) {
+        for (let j = 0; j < grilla[i].length; j++) {
+            if (grilla[i][j] === grilla[i][j + 1] && grilla[i][j] === grilla[i][j + 2]) {
+                return true
+            }
+        }
+    }
+    return false
+}
+
+const hayMatchInicial = () => {
+    if (hayMatchVertical() || hayMatchHorizontal()) {
+        return true
+    }
+    else {
+        return false
+    }
+}
+
 
 // //--------------FALTA HACER----------------
 // //Opciones nuevo juego
@@ -116,9 +155,12 @@ botonNuevoJuego.onclick = () => {
     console.log(dialogoNuevoJuego)
 }
 // //-----------------------------------------
+const vaciarGrillaHTML = () => {
+    grillaHTML.textContent = ''
+}
 
 botonReiniciarJuego.onclick = () => {
-    grillaHTML.textContent = ''
+    //grillaHTML.textContent = ''
     revisarDificultadElegida()
 }
 
@@ -133,6 +175,7 @@ const revisarDificultadElegida = () => {
         grillaDificil()
     }
 }
+
 
 
 
