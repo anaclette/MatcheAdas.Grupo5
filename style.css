@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 body{
    
@@ -89,20 +90,21 @@ display: flex;
     
 }
 
+=======
+>>>>>>> f0fd8bf16da2c5d2eed57f2d7a24b791ea3b869d
 #grilla {
     position: relative;
 }
 
 #grilla > div {
     position: absolute;
-    font-size: 30px;
-     width: 50px;
+    /* width: 50px;
     height: 50px;
     border: 1px solid black;
     box-sizing: border-box;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
 }
 
 .seleccionado {
