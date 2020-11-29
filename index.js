@@ -11,7 +11,7 @@ const items = ['🍉', '🥝', '🍌', '🍇', '🍋', '🥥']
 //alert('Bienvenidx') //la comento para poder trabajar mas tranquila
 
 
-//Pedir al usuario que elija la dificultad de la partida
+//Pedir al usuario que elija la dificultad de la partida-
 
 let dificultad = ''
 botonModoFacil.onclick = () => {
