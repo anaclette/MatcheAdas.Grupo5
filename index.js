@@ -42,6 +42,7 @@ botonModoDificil.onclick = () => {
 
 // Crear una grilla en JS y en HTML con items aleatorios 
 // Si hay matches, volver a generar una grilla
+
 const grillaFacil = () => {
     do {
     vaciarGrillaHTML()
