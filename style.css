@@ -1,15 +1,14 @@
-<<<<<<< HEAD
 
 body{
    
-    background-image: url(./imagenes/background.jpg);
+    background-image: url(./imagenes/background2.jpg);
     
         display: flex;
         justify-content: center;
         align-items: center;
         background-size: cover;
         background-position-y: 30%;
-        background-position-x: 30%
+        background-position-x: 30%:
         padding: 0 10px;
         background-position-x: 30% ;
         padding : 0 10px;
@@ -90,8 +89,6 @@ display: flex;
     
 }
 
-=======
->>>>>>> f0fd8bf16da2c5d2eed57f2d7a24b791ea3b869d
 #grilla {
     position: relative;
 }

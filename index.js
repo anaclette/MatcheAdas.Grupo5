@@ -7,13 +7,9 @@ const botonModoFacil = document.querySelector("#boton-modo-facil")
 const botonModoNormal = document.querySelector("#boton-modo-normal")
 const botonModoDificil = document.querySelector("#boton-modo-dificil")
 const mosaicos = document.getElementsByClassName('mosaico')
-<<<<<<< HEAD
 const items = ['🐺', '🦊', '🦝 ', '🐻 ', '🐨 ', '🐦','🍄','🌲','🍁',]
 console.log(items)
 
-=======
-const items = ['🍉', '🥝', '🍌', '🍇', '🍋', '🥥']
->>>>>>> f0fd8bf16da2c5d2eed57f2d7a24b791ea3b869d
 
 //Comportamiento general de modales
 const abrirModal = (elemento) => {
@@ -27,7 +23,6 @@ const cerrarModal = (elemento) => {
 
 }
 
-<<<<<<< HEAD
 //Pedir al usuario que elija la dificultad de la partida
 
 // let dificultad = ''
@@ -45,40 +40,6 @@ const cerrarModal = (elemento) => {
 //     dificultad = 7
 //     return generarGrilla(7, 7)
 // }
-=======
-
-//Pedir al usuario que elija la dificultad de la partida
-let nivelDificultad = '' //Almaceno niveles de dificultad para reutilizar luego
-
-botonModoFacil.onclick = () => {
-    grillaFacil()
-    cuentaRegresiva()
-    nivelDificultad = 'facil' 
-}
-
-botonModoNormal.onclick = () => {
-    grillaNormal()
-    cuentaRegresiva()
-    nivelDificultad = 'normal'
-}
-
-botonModoDificil.onclick = () => {
-    grillaDificil()
-    cuentaRegresiva()
-    nivelDificultad = 'dificil'
-}
-
-//Empezar cuenta regresiva al crear un juego nuevo --------FUNCIONA JS, FALTA EL MAQUETADO DEL TIMER PARA PODER CONECTARLOS----
-let tiempoRestante = 30
-
-const cuentaRegresiva = () => {
-    tiempoRestante--
-    if (tiempoRestante > 0) {
-        setTimeout(cuentaRegresiva, 1000)
-    }
-    console.log(tiempoRestante)
-}
->>>>>>> f0fd8bf16da2c5d2eed57f2d7a24b791ea3b869d
 
 // Crear una grilla en JS y en HTML con items aleatorios 
 // Si hay matches, volver a generar una grilla
