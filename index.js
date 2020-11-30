@@ -1,6 +1,7 @@
+const body = document.body
 const grillaHTML = document.querySelector("#grilla")
-const dialogoNuevoJuego = document.querySelector(".dialogo.nuevo-juego")
-const botonNuevoJuego = document.querySelector("#boton-nuevo-juego")
+const dialogoNuevoJuego = document.querySelector("#dialogo-nuevo-juego")
+const botonesNuevoJuego = document.querySelectorAll("#boton-nuevo-juego")
 const botonReiniciarJuego = document.querySelector("#boton-reiniciar-juego")
 const botonBuscarMatch = document.querySelector("#boton-buscar-match")
 const botonModoFacil = document.querySelector("#boton-modo-facil")
@@ -8,20 +9,69 @@ const botonModoNormal = document.querySelector("#boton-modo-normal")
 const botonModoDificil = document.querySelector("#boton-modo-dificil")
 const mosaicos = document.getElementsByClassName('mosaico')
 const items = ['🐺', '🦊', '🦝 ', '🐻 ', '🐨 ', '🐦', '🍄', '🌲', '🍁',]
-console.log(items)
+const tiempoRestanteHTML = document.querySelector("#tiempo-restante")
+const overlay = document.querySelector("#overlay")
+const dialogoJuegoTerminado = document.querySelector("#dialogo-juego-terminado")
+const botonAyuda = document.querySelector("#boton-ayuda")
+const botonIconoRestart = document.querySelector("#boton-restart")
+const dialogoBienvenida = document.querySelector("#dialogo-bienvenida")
+const dialogoReiniciarJuego = document.querySelector("#dialogo-reiniciar-juego")
+const botonAJugar = document.querySelector("#boton-empezar-juego")
+const ventanasDeDialogo = document.querySelectorAll(".dialogo")
+const botonCancelar = document.querySelector("#boton-cancelar")
 
 
-//Comportamiento general de modales
-const abrirModal = (elemento) => {
-    elemento.classList.remove('hiden')
+//Comportamiento general del overlay
+const abrirModal = () => {
     overlay.classList.remove('hidden')
+    body.classList.add('no-scroll')
 }
 
-const cerrarModal = (elemento) => {
-    elemento.classList.add('hiden')
-    overlay.classList.add('hiden')
+const cerrarModal = () => {
+    overlay.classList.add('hidden')
 
+    for (let dialogo of ventanasDeDialogo) {
+        dialogo.classList.add('hidden')
+    }
 }
+
+//Comportamiento general de modales y botones
+window.onload = () => {
+    dialogoBienvenida.classList.remove('hidden')
+}
+
+botonAyuda.onclick = () => {
+    abrirModal()
+    dialogoBienvenida.classList.remove('hidden')
+}
+
+botonIconoRestart.onclick = () => {
+    abrirModal()
+    dialogoReiniciarJuego.classList.remove('hidden')
+}
+
+botonAJugar.onclick = () => {
+    botonAJugar.parentElement.parentElement.classList.add('hidden')
+    dialogoNuevoJuego.classList.remove('hidden')
+}
+
+for (let boton of botonesNuevoJuego) {
+    boton.onclick = () => {
+        boton.parentElement.parentElement.classList.add('hidden')
+        dialogoNuevoJuego.classList.remove('hidden')
+    }
+}
+
+botonReiniciarJuego.onclick = () => {
+    revisarDificultadElegida()
+    //dialogoNuevoJuego.classList.remove('hidden')
+    cerrarModal()
+}
+
+botonCancelar.onclick = () => {
+    cerrarModal()
+}
+
 
 //Pedir al usuario que elija la dificultad de la partida
 let nivelDificultad = '' //Almaceno niveles de dificultad para reutilizar luego
@@ -29,30 +79,55 @@ let nivelDificultad = '' //Almaceno niveles de dificultad para reutilizar luego
 botonModoFacil.onclick = () => {
     grillaFacil()
     cuentaRegresiva()
+    cerrarModal()
     nivelDificultad = 'facil'
 }
 
 botonModoNormal.onclick = () => {
     grillaNormal()
     cuentaRegresiva()
+    cerrarModal()
     nivelDificultad = 'normal'
 }
 
 botonModoDificil.onclick = () => {
     grillaDificil()
     cuentaRegresiva()
+    cerrarModal()
     nivelDificultad = 'dificil'
 }
 
-//Empezar cuenta regresiva al crear un juego nuevo --------FUNCIONA JS, FALTA EL MAQUETADO DEL TIMER PARA PODER CONECTARLOS----
-let tiempoRestante = 30
+const revisarDificultadElegida = () => {
+    if (nivelDificultad === 'facil') {
+        grillaFacil()
+    }
+    else if (nivelDificultad === 'normal') {
+        grillaNormal()
+    }
+    else if (nivelDificultad === 'dificil') {
+        grillaDificil()
+    }
+}
+
+//Empezar cuenta regresiva al crear un juego nuevo --------FUNCIONA AL INICIO, TIENE BUG AL REINICIAR----
+let tiempoRestante = 3
 
 const cuentaRegresiva = () => {
-    tiempoRestante--
+    tiempoRestanteHTML.textContent = `0:${tiempoRestante}`
+    
     if (tiempoRestante > 0) {
+        tiempoRestante--
         setTimeout(cuentaRegresiva, 1000)
     }
-    console.log(tiempoRestante)
+    else {
+        terminarJuego()
+    }
+}
+
+const terminarJuego = () => {
+    dialogoNuevoJuego.classList.add('hidden')
+    abrirModal()
+    dialogoJuegoTerminado.classList.remove('hidden')
 }
 
 // Crear una grilla en JS y en HTML con items aleatorios 
@@ -103,7 +178,7 @@ const generarGrilla = (filas, columnas) => {
     }
     return grilla
 }
-console.log(generarGrilla)
+//console.log(generarGrilla)
 
 
 const generarMosaicos = (x, y, array) => {
@@ -165,34 +240,8 @@ const hayMatchInicial = () => {
     }
 }
 
-
-// //--------------FALTA HACER----------------
-// //Opciones nuevo juego
-
-botonNuevoJuego.onclick = () => {
-    console.log(dialogoNuevoJuego)
-}
-// //-----------------------------------------
-
 const vaciarGrillaHTML = () => {
     grillaHTML.textContent = ''
-}
-
-botonReiniciarJuego.onclick = () => {
-    //grillaHTML.textContent = ''
-    revisarDificultadElegida()
-}
-
-const revisarDificultadElegida = () => {
-    if (nivelDificultad === 'facil') {
-        grillaFacil()
-    }
-    else if (nivelDificultad === 'normal') {
-        grillaNormal()
-    }
-    else if (nivelDificultad === 'dificil') {
-        grillaDificil()
-    }
 }
 
 
