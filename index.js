@@ -93,6 +93,7 @@ const generarMosaicos = (x, y, array) => {
     const tamanio = 50
 
     const mosaico = document.createElement('div')
+    
     mosaico.classList.add('mosaico')
     mosaico.dataset.x = x
     mosaico.dataset.y = y
@@ -189,15 +190,20 @@ const revisarDificultadElegida = () => {
 // 
 
 //Seleccionar mosaico al hacer click en el
-const primerMosaicoSeleccionado = ''
-for (let mosaico of mosaicos) {
+let primerMosaicoSeleccionado= ''
+for (let i = 0; i < mosaicos.length; i++) {
+    primerMosaicoSeleccionado+= i
+    
+    console.log("soy un mosaico")
     mosaico.onclick = () => {
-        mosaico.classList.add('seleccionado')
-        const primerMosaicoSeleccionado = mosaico
-        console.log(primerMosaicoSeleccionado)
+     seleccionarMosaico()
     }
 }
 
+const seleccionarMosaico=()=>{
+    mosaico.classList.add('seleccionado')
+    console.log("pepo")
+}
 
 // desaparecen las frutas
 // elimino los elementos tanto en HTML como en JS 
