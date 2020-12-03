@@ -1,72 +1,63 @@
 <!DOCTYPE html>
 <html lang="es">
 
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MatcheADAs G5-</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <title>MatcheADAs G5</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" />
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
     <div class="estructura">
-
-        <h1 class="matcheadas"> MatcheADAs</h1>
-
+        <h1 class="matcheadas"> MATCHEADAS </h1>
         <div class="barra">
-
-                <div class="puntos">
-                    <p>
-                        Combo x
-                    </p>
-                    <p>
-                        Puntos: 0
-                    </p>
-                </div>
-                <div class="botones-barra">
-                    <button class="boton ayuda"> <i class="fas fa-info-circle"></i> </button>
-                    <button class=" boton reiniciar"> <i class="fas fa-sync-alt"></i> </button>
-                </div>
-
-           
-        </div>
-
-
-
-<!--         
-            <div class="botones">
-                <button id="boton-nuevo-juego">Nuevo Juego</button>
-                <button id="boton-reiniciar-juego">Reiniciar</button>
+            <div class="puntos">
+                <p>
+                    Combo x1
+                </p>
+                <p>
+                    Puntos : 0
+                </p>
             </div>
-        </div> -->
+            <div class="estilo-botones-barra">
+                <button class="boton ayuda">
+                    <i class="fas fa-info-circle"></i>
+                </button>
+                <button class="boton restart">
+                    <i class="fas fa-redo-alt"></i>
+                </button>
+            </div>
 
-
-
-
-        <div class="dialogo nuevo-juego">
+        </div>
+        <div class="dialogo juego-terminado">
             <div class="dialogo-botones">
-                <button id="boton-modo-facil">Fácil</button>
-                <button id="boton-modo-normal">Normal</button>
-                <button id="boton-modo-dificil">Difícil</button>
+                <button id="boton-nuevo-juego">Nuevo Juego</button>
+                <button id="boton-reiniciar-juego">Reiniciar Juego</button>
+
             </div>
-        </div> 
+            <div class="dialogo-dificultad">
+                <div class="dialogo-botones">
+                    <button id="boton-modo-facil" class="ocultar">Facil</button>
+                    <button id="boton-modo-normal" class="ocultar">Medio</button>
+                    <button id="boton-modo-dificil" class="ocultar">Dificil</button>
+                </div>
 
-        <div class="contenedor-grilla">
+            </div>
+            <div class="matches">
+            </div>
 
-
-
-            <div id="grilla"></div>
-
+            <button id="buscar-matches">Buscar Matches</button>
         </div>
 
-        <div class="contenedor-reloj">
 
-            <i class="far fa-clock"></i>
-        </div>
-
+        <div id="grilla" class="grilla"></div>
     </div>
+
+    <div id="grilla"></div>
 
     <script src="index.js"></script>
 </body>
