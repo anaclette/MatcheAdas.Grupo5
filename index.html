@@ -7,14 +7,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MatcheADAs G5</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+    <!-- IMPORTANTE:Por favor no borrar/modificar la clase dialogo, es muy necesaria para que el JS funcione!!! -->
+    <div id="overlay">
+
+        <div class="modal inicial">
+            <div class="dialogo hidden" id="dialogo-bienvenida">
+                <h2>¡Bienvenida!</h2>
+                <p>En MatcheADAs tu objetivo es juntar tres o más ítems del mismo tipo,
+                    ya sea en fila o columna. Para eso, selecciona un ítem y a
+                    continuación un ítem adyacente para intercambiarlos de lugar.</p>
+                <p>Si se forma un grupo, esos ítems se eliminarán y ganarás puntos.
+                    ¡Sigue armando grupos de 3 o más antes de que se acabe el tiempo!</p>
+                <div class="dialogo-botones">
+                    <button class="boton" id="boton-empezar-juego">A Jugar</button>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="dialogo dialogo-dificultad hidden" id="dialogo-nuevo-juego">
+            <h2>Nuevo Juego</h2>
+            <p>Selecciona una dificultad</p>
+            <div class="dialogo-botones">
+                <button id="boton-modo-facil" class="boton ocultar">Facil</button>
+                <button id="boton-modo-normal" class="boton ocultar">Medio</button>
+                <button id="boton-modo-dificil" class="boton ocultar">Dificil</button>
+            </div>
+        </div>
+
+        <div class="dialogo hidden" id="dialogo-juego-terminado">
+            <h2>¡Juego terminado!</h2>
+            <!-- Aca va un <p> con el puntaje cuando tengamos la funcion hecha -->
+            <div class="dialogo-botones">
+                <button class="boton" id="boton-nuevo-juego">Nuevo Juego</button>
+                <button class="boton" id="boton-reiniciar-juego">Reiniciar Juego</button>
+            </div>
+        </div>
+
+        <div class="dialogo hidden" id="dialogo-reiniciar-juego">
+            <h2>Reiniciar Juego?</h2>
+            <p>Perderás todo tu puntaje acumulado!</p>
+            <div class="dialogo-botones">
+                <button class="boton" id="boton-cancelar">Cancelar</button>
+                <button class="boton" id="boton-nuevo-juego">Nuevo Juego</button>
+            </div>
+        </div>
+
+        <div class="matches">
+            <button id="buscar-matches">Buscar Matches</button>
+        </div>
+    </div>
 
     <div class="estructura">
         <h1 class="matcheadas"> MATCHEADAS </h1>
-        <div class="barra">
+        <div class="barra informacion-hidden">
             <div class="puntos">
                 <p>
                     Combo x1
@@ -23,42 +74,33 @@
                     Puntos : 0
                 </p>
             </div>
+
+            <!-- Ubico el timer aqui provisoriamente hasta que el maquetado este listo -->
+            
+            <!-- ----------------------------------------------------------------------------- -->
+
             <div class="estilo-botones-barra">
-                <button class="boton ayuda">
+                <button class="botones ayuda" id="boton-ayuda">
                     <i class="fas fa-info-circle"></i>
                 </button>
-                <button class="boton restart">
+                <button class="botones restart" id="boton-restart">
                     <i class="fas fa-redo-alt"></i>
                 </button>
             </div>
 
         </div>
-        <div class="dialogo juego-terminado">
-            <div class="dialogo-botones">
-                <button id="boton-nuevo-juego">Nuevo Juego</button>
-                <button id="boton-reiniciar-juego">Reiniciar Juego</button>
-
-            </div>
-            <div class="dialogo-dificultad">
-                <div class="dialogo-botones">
-                    <button id="boton-modo-facil" class="ocultar">Facil</button>
-                    <button id="boton-modo-normal" class="ocultar">Medio</button>
-                    <button id="boton-modo-dificil" class="ocultar">Dificil</button>
-                </div>
-
-            </div>
-            <div class="matches">
-            </div>
-
-            <button id="buscar-matches">Buscar Matches</button>
-        </div>
 
 
         <div id="grilla" class="grilla"></div>
+
+
     </div>
 
     <div id="grilla"></div>
-
+    <div class="contenedor-cuenta-regresiva">
+        <i class="fas fa-hourglass-half"></i>
+        <p class="cuenta-regresiva" id="tiempo-restante">0:00</p>
+    </div>
     <script src="index.js"></script>
 </body>
 
