@@ -1,8 +1,8 @@
-# [🇺🇸EN] 🎮 Match 3 🎮 (under construction)
+# [🇺🇸EN] 🎮 Match 3 🎮 (🚧 under construction 🚧)
 
 This is the third project that we've worked on as part of the **Frontend web development** training at **ADA ITW**, and the first one done in teams.
 
-## Tecnologies and design
+## Technologies and design
 The technologies used for this project are:
 
 -HTML5
@@ -23,7 +23,7 @@ This is only our third coding project as well as my first time working in teams.
 
 ### 🖱️[link coming soon]() 
 
-# [🇦🇷ESP] 🎮 Match 3 🎮 (en construcción)
+# [🇦🇷ESP] 🎮 Match 3 🎮 (🚧 en construcción 🚧)
 
 Este es el tercer proyecto que forma parte de la currícula de la carrera de **Desarrollo Web Frontend** de **ADA ITW** y el primero hecho en equipo.
 
