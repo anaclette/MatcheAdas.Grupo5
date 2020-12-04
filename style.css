@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel+Decorative:wght@700&display=swap");
 
 body {
-  background-image: url(./imagenes/background2.jpg);
+  background-image: url(./imagenes/background.jpg);
   display: flex;
   background-size: cover;
   background-position-x: 30%;
@@ -170,10 +170,10 @@ body {
     display: flex;
 }
 
-
+/*  CLASE PARA BORRAR BARRA INFORMATIVA
 .informacion-hidden{
     display: none;
-}
+} */
 /*Comienzan clases especiales*/
 .seleccionado {
   border: 1px solid black;
