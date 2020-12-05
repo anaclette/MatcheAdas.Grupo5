@@ -1,5 +1,33 @@
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel+Decorative:wght@700&display=swap");
 
+@keyframes shrink {
+	from {
+		transform: scale(1);
+	}
+	to {
+		transform: scale(0);
+	}
+}
+
+@keyframes grow {
+	from {
+		transform: scale(0);
+	}
+	to {
+		transform: scale(1);
+	}
+}
+
+.animacion-desaparecer {
+	animation-name: shrink;
+	animation-duration: 500ms;
+}
+
+.animacion-aparecer {
+	animation-name: grow;
+	animation-duration: 500ms;
+}
+
 body {
 	background-image: url(./imagenes/background2.jpg);
 	display: flex;

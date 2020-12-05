@@ -9,6 +9,7 @@ const botonModoNormal = document.querySelector('#boton-modo-normal');
 const botonModoDificil = document.querySelector('#boton-modo-dificil');
 const items = [ '🐺', '🦊', '🦝 ', '🐻 ', '🐨 ', '🐦' ];
 let mosaicos = [];
+let mosaicoSeleccionado = null;
 const tiempoRestanteHTML = document.querySelector('#tiempo-restante');
 const overlay = document.querySelector('#overlay');
 const dialogoJuegoTerminado = document.querySelector('#dialogo-juego-terminado');
@@ -84,33 +85,54 @@ botonCancelar.onclick = () => {
 //Pedir al usuario que elija la dificultad de la partida
 let nivelDificultad = ''; //Almaceno niveles de dificultad para reutilizar luego
 
-botonModoFacil.onclick = () => {
-	grillaFacil();
-	let clicks = [];
+const reemplazarMatches = () => {
+	let matches = matchesHorizontales().concat(matchesVerticales());
+	for (let i = 0; i < matches.length; i++) {
+		let x = matches[i][0];
+		let y = matches[i][1];
+		grilla[x][y] = obtenerItemAlAzar(items);
+		let mosaicoMatch = document.querySelector(`div[data-x='${x}'][data-y='${y}']`);
+		mosaicoMatch.classList.add('animacion-desaparecer');
+		setTimeout(() => {
+			mosaicoMatch.innerHTML = grilla[x][y];
+			mosaicoMatch.classList.remove('animacion-desaparecer');
+			mosaicoMatch.classList.add('animacion-aparecer');
+			if (hayMatch()) {
+				reemplazarMatches();
+			}
+		}, 500);
+	}
+};
 
-	for (let mosaico of mosaicos) {
-		mosaico.onclick = () => {
-			// PRIMER CLICK
-
-			clicks.push(mosaico);
-			for (let mosaico2 of mosaicos) {
-				// SEGUNDO CLICK
-				mosaico2.onclick = () => {
-					clicks.push(mosaico2);
-					if (sonAdyacentes(clicks[0], clicks[1])) {
-						console.log(clicks[0]);
-						console.log(clicks[1]);
-						// intercambiarMosaicos(clicks[0], clicks[1]);
-						clicks = [];
+const clicksMosaicos = (elementos) => {
+	for (let elemento of elementos) {
+		elemento.onclick = () => {
+			if (mosaicoSeleccionado) {
+				if (sonAdyacentes(elemento, mosaicoSeleccionado)) {
+					intercambiarMosaicos(elemento, mosaicoSeleccionado);
+					if (hayMatch()) {
+						//vaciar matches
+						reemplazarMatches();
 					} else {
-						clicks = [];
+						let mosaicoSeleccionadoPrevio = mosaicoSeleccionado;
+						setTimeout(() => intercambiarMosaicos(elemento, mosaicoSeleccionadoPrevio), 500);
 					}
-				};
+				}
+				mosaicoSeleccionado.classList.remove('seleccionado');
+				mosaicoSeleccionado = null;
+			} else {
+				elemento.classList.add('seleccionado');
+				mosaicoSeleccionado = elemento;
 			}
 		};
 	}
+};
+
+botonModoFacil.onclick = () => {
+	grillaFacil();
 	cuentaRegresiva();
 	cerrarModal();
+	clicksMosaicos(mosaicos);
 	nivelDificultad = 'facil';
 };
 
@@ -118,6 +140,7 @@ botonModoNormal.onclick = () => {
 	grillaNormal();
 	cuentaRegresiva();
 	cerrarModal();
+	clicksMosaicos(mosaicos);
 	nivelDificultad = 'normal';
 };
 
@@ -125,6 +148,7 @@ botonModoDificil.onclick = () => {
 	grillaDificil();
 	cuentaRegresiva();
 	cerrarModal();
+	clicksMosaicos(mosaicos);
 	nivelDificultad = 'dificil';
 };
 
@@ -175,7 +199,7 @@ const grillaFacil = () => {
 		vaciarGrillaHTML();
 		generarGrilla(9, 9);
 		generarGrillaEnHTML(9, 9, items);
-	} while (hayMatchInicial());
+	} while (hayMatch());
 };
 
 const grillaNormal = () => {
@@ -183,7 +207,7 @@ const grillaNormal = () => {
 		vaciarGrillaHTML();
 		generarGrilla(8, 8);
 		generarGrillaEnHTML(8, 8, items);
-	} while (hayMatchInicial());
+	} while (hayMatch());
 };
 
 const grillaDificil = () => {
@@ -191,7 +215,7 @@ const grillaDificil = () => {
 		vaciarGrillaHTML();
 		generarGrilla(7, 7);
 		generarGrillaEnHTML(7, 7, items);
-	} while (hayMatchInicial());
+	} while (hayMatch());
 };
 
 const obtenerNumeroAlAzar = (items) => {
@@ -213,7 +237,6 @@ const generarGrilla = (filas, columnas) => {
 	}
 	return grilla;
 };
-//console.log(generarGrilla)
 
 const generarMosaicos = (x, y, array) => {
 	const tamanio = 50;
@@ -226,20 +249,6 @@ const generarMosaicos = (x, y, array) => {
 	mosaico.innerHTML = array[x][y];
 	mosaico.style.top = `${x * tamanio}px`;
 	mosaico.style.left = `${y * tamanio}px`;
-
-	// mosaico.onclick = () => {
-	// 	console.log(mosaicoSeleccionado);
-	// 	buscarBloques();
-	// 	if (mosaicoSeleccionado) {
-	// 		// mover mosaico
-	// 		intercambiarMosaicos(mosaico, mosaicoSeleccionado);
-	// 		mosaicoSeleccionado = null;
-	// 	} else {
-	// 		// seleccionar mosaico
-	// 		mosaicoSeleccionado = mosaico;
-	// 	}
-	// };
-
 	return mosaico;
 };
 
@@ -280,169 +289,61 @@ const intercambiarMosaicos = (elem1, elem2) => {
 	elem2.dataset.y = datay1;
 };
 
-const sonAdyacentes = (click1, click2) => {
-	const datax1 = Number(click1.dataset.x);
-	const datax2 = Number(click2.dataset.x);
-	const datay1 = Number(click1.dataset.y);
-	const datay2 = Number(click2.dataset.y);
+const sonAdyacentes = (mosaico1, mosaico2) => {
+	const datax1 = Number(mosaico1.dataset.x);
+	const datay1 = Number(mosaico1.dataset.y);
+	const datax2 = Number(mosaico2.dataset.x);
+	const datay2 = Number(mosaico2.dataset.y);
 
 	if (
 		(datax1 === datax2 && datay1 === datay2 + 1) ||
 		(datax1 === datax2 && datay1 === datay2 - 1) ||
 		(datay1 === datay2 && datax1 === datax2 + 1) ||
-		(datay1 === datay2 && datay2 === datay2 - 1)
+		(datay1 === datay2 && datax1 === datax2 - 1)
 	) {
-		console.log('son adyacentes');
-		intercambiarMosaicos(click1, click2);
-	} else {
-		console.log('no lo son');
-	}
-};
-
-const buscarBloques = () => {
-	let matchesHorizontales = [];
-	let matchesVerticales = [];
-
-	for (let i = 0; i < grilla.length; i++) {
-		for (let j = 0; j < grilla[i].length; j++) {
-			if (grilla[i][j] === grilla[i][j + 1] && grilla[i][j] === grilla[i][j + 2]) {
-				matchesHorizontales.push([ i, j ]);
-				matchesHorizontales.push([ i, j + 1 ]);
-				matchesHorizontales.push([ i, j + 2 ]);
-			}
-			if (
-				grilla[i + 1] &&
-				grilla[i + 2] &&
-				grilla[i][j] === grilla[i + 1][j] &&
-				grilla[i][j] === grilla[i + 2][j]
-			) {
-				matchesVerticales.push([ i, j ]);
-				matchesVerticales.push([ i + 1, j ]);
-				matchesVerticales.push([ i + 2, j ]);
-			}
-		}
-	}
-	const obtenerMosaico = (arr) => {
-		return document.querySelector(`button[data-x='${arr[0]}'][data-y='${arr[1]}']`);
-	};
-
-	for (let i = 0; i < matchesHorizontales.length; i++) {
-		obtenerMosaico(matchesHorizontales[i]);
-	}
-	for (let i = 0; i < matchesVerticales.length; i++) {
-		obtenerMosaico(matchesVerticales[i]);
-	}
-};
-
-// Chequeamos si hay matches al inicio
-const hayMatchVertical = () => {
-	for (let i = 0; i < grilla.length; i++) {
-		for (let j = 0; j < grilla[i].length; j++) {
-			if (
-				grilla[i + 1] &&
-				grilla[i + 2] &&
-				grilla[i][j] === grilla[i + 1][j] &&
-				grilla[i][j] === grilla[i + 2][j]
-			) {
-				return true;
-			}
-		}
-	}
-	return false;
-};
-
-const hayMatchHorizontal = () => {
-	for (let i = 0; i < grilla.length; i++) {
-		for (let j = 0; j < grilla[i].length; j++) {
-			if (grilla[i][j] === grilla[i][j + 1] && grilla[i][j] === grilla[i][j + 2]) {
-				return true;
-			}
-		}
-	}
-	return false;
-};
-
-const hayMatchInicial = () => {
-	if (hayMatchVertical() || hayMatchHorizontal()) {
 		return true;
-	} else {
-		return false;
 	}
+	return false;
 };
 
-// const matchVertical = () => {
-// 	let matchVertical = [];
+const hayMatch = () => {
+	return matchesVerticales().length > 0 || matchesHorizontales().length > 0;
+};
 
-// 	for (let i = 0; i < grilla.length; i++) {
-// 		for (let j = 0; j < grilla[i].length; j++) {
-// 			if (
-// 				grilla[i + 1] &&
-// 				grilla[i + 2] &&
-// 				grilla[i][j] === grilla[i + 1][j] &&
-// 				grilla[i][j] === grilla[i + 2][j]
-// 			) {
-// 				matchVertical.concat([ [ i, j ], [ i + 1, j ], [ i + 2, j ] ]);
-// 			}
-// 		}
-// 	}
-// 	if (matchVertical.length === 0) {
-// 		matchVertical = false;
-// 	}
-// 	return matchVertical;
-// };
+const matchesVerticales = () => {
+	let matchVertical = [];
 
-// const matchHorizontal = () => {
-// 	let matchHorizontal = [];
+	for (let i = 0; i < grilla.length; i++) {
+		for (let j = 0; j < grilla[i].length; j++) {
+			if (
+				grilla[i + 1] &&
+				grilla[i + 2] &&
+				grilla[i][j] === grilla[i + 1][j] &&
+				grilla[i][j] === grilla[i + 2][j]
+			) {
+				matchVertical = matchVertical.concat([ [ i, j ], [ i + 1, j ], [ i + 2, j ] ]);
+			}
+		}
+	}
+	return matchVertical;
+};
 
-// 	for (let i = 0; i < grilla.length; i++) {
-// 		for (let j = 0; j < grilla[i].length; j++) {
-// 			if (grilla[i][j] === grilla[i][j + 1] && grilla[i][j] === grilla[i][j + 2]) {
-// 				matchHorizontal.concat([ [ i, j ], [ i, j + 1 ], [ i, j + 2 ] ]);
-// 			}
-// 		}
-// 	}
-// 	if (matchHorizontal.length === 0) {
-// 		matchHorizontal = false;
-// 	}
-// 	return matchHorizontal;
-// };
+const matchesHorizontales = () => {
+	let matchHorizontal = [];
+
+	for (let i = 0; i < grilla.length; i++) {
+		for (let j = 0; j < grilla[i].length; j++) {
+			if (grilla[i][j] === grilla[i][j + 1] && grilla[i][j] === grilla[i][j + 2]) {
+				matchHorizontal = matchHorizontal.concat([ [ i, j ], [ i, j + 1 ], [ i, j + 2 ] ]);
+			}
+		}
+	}
+	return matchHorizontal;
+};
 
 const vaciarGrillaHTML = () => {
 	grillaHTML.textContent = '';
 };
-
-// Si no hay bloques,
-// el usuario hace click en un mosaico
-// el usuario hace click en otro mosaico
-// chequeamos si moviendo los mosaicos de lugar hay matches
-// si no hay, volvemos elementos a la posicion original
-// si hay, mantenemos los elementos en la nueva posicion
-//
-
-const detectarMatch = () => {
-	// for (let mosaico of mosaicos) {
-	// 	mosaico.onclick = () => {
-	// 	if (mosaicoSeleccionado) {
-	// 		// mover mosaico
-	// 		intercambiarMosaicos(mosaico, mosaicoSeleccionado);
-	// 		mosaicoSeleccionado = null;
-	// 	} else {
-	// 		// seleccionar mosaico
-	// 		mosaico.classList.add('seleccionado');
-	// 		mosaicoSeleccionado = mosaico;
-	// 	}
-	// 	buscarBloques();
-	// 	if (matchHorizontal() || matchVertical()) {
-	// 	} else {
-	// 	}
-	// };
-	// }
-};
-
-detectarMatch();
-
-// desaparecen las frutas
-// elimino los elementos tanto en HTML como en JS
 
 // primera version: rellenar con elementos al azar
 
