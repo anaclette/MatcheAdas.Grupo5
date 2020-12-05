@@ -24,7 +24,7 @@ const botonCancelar = document.querySelector("#boton-cancelar")
 //Comportamiento general del overlay
 const abrirModal = () => {
     overlay.classList.remove('hidden')
-    body.classList.add('no-scroll')
+    //body.classList.add('no-scroll')
 }
 
 const cerrarModal = () => {
