@@ -68,12 +68,47 @@ botonCancelar.onclick = () => {
     cerrarModal()
 }
 
+botonAJugar.onclick = () => {
+    botonAJugar.parentElement.parentElement.classList.add('hidden')
+    dialogoNuevoJuego.classList.remove('hidden')
+}
+
+for (let boton of botonesNuevoJuego) {
+    boton.onclick = () => {
+        boton.parentElement.parentElement.classList.add('hidden')
+        dialogoNuevoJuego.classList.remove('hidden')
+    }
+}
+
+
+
+botonCancelar.onclick = () => {
+    cerrarModal()
+}
+
 
 //Pedir al usuario que elija la dificultad de la partida
 let nivelDificultad = '' //Almaceno niveles de dificultad para reutilizar luego
 
 botonModoFacil.onclick = () => {
     grillaFacil()
+    
+for (let mosaico of mosaicos) {
+    mosaico.onclick = () => {
+// PRIMER CLICK
+        console.log(mosaico);
+         clicks.push(mosaico)
+          for (let mosaico2 of mosaicos) {
+// SEGUNDO CLICK
+             mosaico2.onclick = () => {
+                 console.log(mosaico2);
+             clicks.push(mosaico2);
+             
+      }
+    }
+}
+}
+
     cuentaRegresiva()
     cerrarModal()
     nivelDificultad = 'facil'
@@ -290,7 +325,4 @@ const seleccionarMosaico=()=>{
 // obtener la cantidad de posciones vacias que tiene debajo
 // bajar el item esas pisiciones
 // rellenar posiciones restantes (las de mas arriba) con elementos al azar
-
-
-
 
