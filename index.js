@@ -20,6 +20,8 @@ const dialogoReiniciarJuego = document.querySelector('#dialogo-reiniciar-juego')
 const botonAJugar = document.querySelector('#boton-empezar-juego');
 const ventanasDeDialogo = document.querySelectorAll('.dialogo');
 const botonCancelar = document.querySelector('#boton-cancelar');
+let contadorPuntos = document.querySelector('#contador-puntos');
+let puntajeFinalObtenido = document.querySelector('#puntaje-obtenido');
 
 //Comportamiento general del overlay
 const abrirModal = () => {
@@ -48,6 +50,7 @@ botonAyuda.onclick = () => {
 botonIconoRestart.onclick = () => {
 	abrirModal();
 	dialogoReiniciarJuego.classList.remove('hidden');
+	actualizarPuntaje()
 };
 
 botonAJugar.onclick = () => {
@@ -80,12 +83,22 @@ for (let boton of botonesNuevoJuego) {
 
 botonCancelar.onclick = () => {
 	cerrarModal();
+	actualizarPuntaje()
 };
 
 //Pedir al usuario que elija la dificultad de la partida
 let nivelDificultad = ''; //Almaceno niveles de dificultad para reutilizar luego
 
+//-----FUNCION RELLENAR MATCHES ELIMINADOS-----
+// primera version: rellenar con elementos al azar
+// segunda version: hacer que los elementos "caigan"
+// mientras haya items con posiciones vacias por debajo,
+// obtener la cantidad de posciones vacias que tiene debajo
+// bajar el item esas pisiciones
+// rellenar posiciones restantes (las de mas arriba) con elementos al azar
+puntos = 0
 const reemplazarMatches = () => {
+	
 	let matches = matchesHorizontales().concat(matchesVerticales());
 	for (let i = 0; i < matches.length; i++) {
 		let x = matches[i][0];
@@ -101,6 +114,8 @@ const reemplazarMatches = () => {
 				reemplazarMatches();
 			}
 		}, 500);
+		puntos+= 100
+		contadorPuntos.textContent = `${puntos}`
 	}
 };
 
@@ -162,15 +177,15 @@ const revisarDificultadElegida = () => {
 	}
 };
 
-//Empezar cuenta regresiva al crear un juego nuevo --------FUNCIONA AL INICIO, TIENE BUG AL REINICIAR----
-let tiempoRestante = 3;
+//Empezar cuenta regresiva al crear un juego nuevo 
+let tiempoRestante = 30;
 
 const cuentaRegresiva = () => {
 	tiempoRestanteHTML.textContent = `0:${tiempoRestante}`;
 
 	if (tiempoRestante > 0) {
 		tiempoRestante--;
-		// setTimeout(cuentaRegresiva, 1000);
+		//setTimeout(cuentaRegresiva, 1000); //--------COMENTADO TEMPORALMENTE PARA PODER TRABAJR TRANQUILAS----
 	} else {
 		tiempoRestante = 3;
 		terminarJuego();
@@ -178,18 +193,14 @@ const cuentaRegresiva = () => {
 };
 
 botonReiniciarJuego.onclick = () => {
-	console.log('Pepo');
 	revisarDificultadElegida();
 	//dialogoNuevoJuego.classList.remove('hidden')
 	cuentaRegresiva();
+	actualizarPuntaje()
 	cerrarModal();
 };
 
-const terminarJuego = () => {
-	dialogoNuevoJuego.classList.add('hidden');
-	abrirModal();
-	dialogoJuegoTerminado.classList.remove('hidden');
-};
+
 
 // Crear una grilla en JS y en HTML con items aleatorios
 // Si hay matches, volver a generar una grilla
@@ -345,10 +356,16 @@ const vaciarGrillaHTML = () => {
 	grillaHTML.textContent = '';
 };
 
-// primera version: rellenar con elementos al azar
+//FUNCION PARA ACTUALIZAR PUNTAJE
+const actualizarPuntaje = () => {
+	puntos = 0
+	contadorPuntos.textContent = `${puntos}`
+}
 
-// segunda version: hacer que los elementos "caigan"
-// mientras haya items con posiciones vacias por debajo,
-// obtener la cantidad de posciones vacias que tiene debajo
-// bajar el item esas pisiciones
-// rellenar posiciones restantes (las de mas arriba) con elementos al azar
+
+const terminarJuego = () => {
+	dialogoNuevoJuego.classList.add('hidden');
+	abrirModal();
+	dialogoJuegoTerminado.classList.remove('hidden');
+	puntajeFinalObtenido.textContent = `${puntos}`
+};

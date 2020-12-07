@@ -42,7 +42,7 @@
 
         <div class="dialogo hidden" id="dialogo-juego-terminado">
             <h2>¡Juego terminado!</h2>
-            <!-- Aca va un <p> con el puntaje cuando tengamos la funcion hecha -->
+            <p>Puntaje Obtenido: <span id="puntaje-obtenido"></span></p>
             <div class="dialogo-botones">
                 <button class="boton" id="boton-nuevo-juego">Nuevo Juego</button>
                 <button class="boton" id="boton-reiniciar-juego">Reiniciar Juego</button>
@@ -68,10 +68,10 @@
         <div class="barra informacion-hidden">
             <div class="puntos">
                 <p>
-                    Combo x1
+                    Combo x <span id="contador-combos">1</span>
                 </p>
                 <p>
-                    Puntos : 0
+                    Puntos: <span id="contador-puntos">0</span>
                 </p>
             </div>
 
