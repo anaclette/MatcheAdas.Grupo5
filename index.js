@@ -50,7 +50,7 @@ botonAyuda.onclick = () => {
 botonIconoRestart.onclick = () => {
 	abrirModal();
 	dialogoReiniciarJuego.classList.remove('hidden');
-	actualizarPuntaje()
+	actualizarPuntaje();
 };
 
 botonAJugar.onclick = () => {
@@ -83,7 +83,7 @@ for (let boton of botonesNuevoJuego) {
 
 botonCancelar.onclick = () => {
 	cerrarModal();
-	actualizarPuntaje()
+	actualizarPuntaje();
 };
 
 //Pedir al usuario que elija la dificultad de la partida
@@ -96,9 +96,8 @@ let nivelDificultad = ''; //Almaceno niveles de dificultad para reutilizar luego
 // obtener la cantidad de posciones vacias que tiene debajo
 // bajar el item esas pisiciones
 // rellenar posiciones restantes (las de mas arriba) con elementos al azar
-puntos = 0
+puntos = 0;
 const reemplazarMatches = () => {
-	
 	let matches = matchesHorizontales().concat(matchesVerticales());
 	for (let i = 0; i < matches.length; i++) {
 		let x = matches[i][0];
@@ -113,17 +112,8 @@ const reemplazarMatches = () => {
 			mosaicoMatch.innerHTML = grilla[x][y];
 			mosaicoMatch.classList.remove('animacion-desaparecer');
 			mosaicoMatch.classList.add('animacion-aparecer');
-			if (hayMatch()) {
-				reemplazarMatches();
-			}
-<<<<<<< HEAD
 		}, 1000);
 		mosaicoMatch.classList.remove('animacion-aparecer');
-=======
-		}, 500);
-		puntos+= 100
-		contadorPuntos.textContent = `${puntos}`
->>>>>>> ac74c21ff9fbbcf390eafa291955d6ff0a125da7
 	}
 	puntos += 100;
 	contadorPuntos.textContent = `${puntos}`;
@@ -193,7 +183,7 @@ const revisarDificultadElegida = () => {
 	}
 };
 
-//Empezar cuenta regresiva al crear un juego nuevo 
+//Empezar cuenta regresiva al crear un juego nuevo
 let tiempoRestante = 30;
 
 const cuentaRegresiva = () => {
@@ -201,11 +191,7 @@ const cuentaRegresiva = () => {
 
 	if (tiempoRestante > 0) {
 		tiempoRestante--;
-<<<<<<< HEAD
 		setTimeout(cuentaRegresiva, 30000);
-=======
-		//setTimeout(cuentaRegresiva, 1000); //--------COMENTADO TEMPORALMENTE PARA PODER TRABAJR TRANQUILAS----
->>>>>>> ac74c21ff9fbbcf390eafa291955d6ff0a125da7
 	} else {
 		tiempoRestante = 3;
 		terminarJuego();
@@ -216,11 +202,9 @@ botonReiniciarJuego.onclick = () => {
 	revisarDificultadElegida();
 	//dialogoNuevoJuego.classList.remove('hidden')
 	cuentaRegresiva();
-	actualizarPuntaje()
+	actualizarPuntaje();
 	cerrarModal();
 };
-
-
 
 // Crear una grilla en JS y en HTML con items aleatorios
 // Si hay matches, volver a generar una grilla
@@ -378,14 +362,13 @@ const vaciarGrillaHTML = () => {
 
 //FUNCION PARA ACTUALIZAR PUNTAJE
 const actualizarPuntaje = () => {
-	puntos = 0
-	contadorPuntos.textContent = `${puntos}`
-}
-
+	puntos = 0;
+	contadorPuntos.textContent = `${puntos}`;
+};
 
 const terminarJuego = () => {
 	dialogoNuevoJuego.classList.add('hidden');
 	abrirModal();
 	dialogoJuegoTerminado.classList.remove('hidden');
-	puntajeFinalObtenido.textContent = `${puntos}`
+	puntajeFinalObtenido.textContent = `${puntos}`;
 };
