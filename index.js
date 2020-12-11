@@ -92,7 +92,10 @@ const reemplazarMatches = () => {
 		let y = matches[i][1];
 		grilla[x][y] = obtenerItemAlAzar(items);
 		let mosaicoMatch = document.querySelector(`div[data-x='${x}'][data-y='${y}']`);
-		mosaicoMatch.classList.add('animacion-desaparecer');
+		setTimeout(() => {
+			mosaicoMatch.classList.add('animacion-desaparecer');
+		}, 500);
+
 		setTimeout(() => {
 			mosaicoMatch.innerHTML = grilla[x][y];
 			mosaicoMatch.classList.remove('animacion-desaparecer');
@@ -100,8 +103,17 @@ const reemplazarMatches = () => {
 			if (hayMatch()) {
 				reemplazarMatches();
 			}
-		}, 500);
+		}, 1000);
+		mosaicoMatch.classList.remove('animacion-aparecer');
 	}
+	puntos += 100;
+	contadorPuntos.textContent = `${puntos}`;
+	setTimeout(() => {
+		if (hayMatch()) {
+			console.log('hay match');
+			reemplazarMatches();
+		}
+	}, 1500);
 };
 
 const clicksMosaicos = (elementos) => {
@@ -115,7 +127,7 @@ const clicksMosaicos = (elementos) => {
 						reemplazarMatches();
 					} else {
 						let mosaicoSeleccionadoPrevio = mosaicoSeleccionado;
-						setTimeout(() => intercambiarMosaicos(elemento, mosaicoSeleccionadoPrevio), 500);
+						setTimeout(() => intercambiarMosaicos(elemento, mosaicoSeleccionadoPrevio), 400);
 					}
 				}
 				mosaicoSeleccionado.classList.remove('seleccionado');
@@ -170,7 +182,7 @@ const cuentaRegresiva = () => {
 
 	if (tiempoRestante > 0) {
 		tiempoRestante--;
-		// setTimeout(cuentaRegresiva, 1000);
+		setTimeout(cuentaRegresiva, 30000);
 	} else {
 		tiempoRestante = 3;
 		terminarJuego();
