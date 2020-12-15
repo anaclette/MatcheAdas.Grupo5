@@ -20,9 +20,19 @@ const ventanasDeDialogo = document.querySelectorAll('.dialogo');
 const botonCancelar = document.querySelector('#boton-cancelar');
 let contadorPuntos = document.querySelector('#contador-puntos');
 let puntajeFinalObtenido = document.querySelector('#puntaje-obtenido');
+
+//Variables generales
 let mosaicos = [];
 let mosaicoSeleccionado = null;
 let temporizador = null
+let nivelDificultad = ''; //Almaceno niveles de dificultad para reutilizar luego
+let grilla = [];
+let tamanioMosaico = 0 //Para funcion definirTamanioMosaico
+let puntos = 0 //Establecer la cantidad de puntos que hay en el marcador:
+let tiempoRestante = 30; //Para la funcion cuentaRegresiva
+
+
+
 // ------------COMPORTAMIENTO GENERAL DEL OVERLAY
 
 //Abrir y cerrar overlay cuando se le da a reiniciar juego
@@ -83,14 +93,11 @@ for (let boton of botonesNuevoJuego) {
 
 //---------ELEGIR LOS MODOS DE JUEGO
 
-let nivelDificultad = ''; //Almaceno niveles de dificultad para reutilizar luego
-
 botonModoFacil.onclick = () => {
 	grillaFacil();
 	cerrarModal();
 	clicksMosaicos(mosaicos);
 	nivelDificultad = 'facil';
-	//resetearCuentaRegresiva()
 	clearTimeout(temporizador)
 	tiempoRestante = 30
 	cuentaRegresiva();
@@ -124,6 +131,7 @@ botonModoDificil.onclick = () => {
 const grillaFacil = () => {
 	do {
 		vaciarGrillaHTML();
+		definirTamanioMosaico(9)
 		generarGrilla(9, 9);
 		generarGrillaEnHTML(9);
 	} while (hayMatch());
@@ -132,6 +140,7 @@ const grillaFacil = () => {
 const grillaNormal = () => {
 	do {
 		vaciarGrillaHTML();
+		definirTamanioMosaico(8)
 		generarGrilla(8, 8);
 		generarGrillaEnHTML(8);
 	} while (hayMatch());
@@ -140,6 +149,7 @@ const grillaNormal = () => {
 const grillaDificil = () => {
 	do {
 		vaciarGrillaHTML();
+		definirTamanioMosaico(7)
 		generarGrilla(7, 7);
 		generarGrillaEnHTML(7);
 	} while (hayMatch());
@@ -156,8 +166,7 @@ const obtenerItemAlAzar = (items) => {
 };
 
 
-
-let grilla = [];
+//Generar grilla en JS
 const generarGrilla = (filas, columnas) => {
 	grilla = [];
 	for (let i = 0; i < filas; i++) {
@@ -170,8 +179,12 @@ const generarGrilla = (filas, columnas) => {
 	return grilla;
 };
 
+//Definir tamanio de los mosaicos de acuerdo a la dificultad elegida
+const definirTamanioMosaico = (columnas) => {
+	tamanioMosaico = 450 / columnas //--------BUSCAR LA FORMA DE NO HARDCODEAR ESTE NUMERO--------
+}
+
 const generarMosaicos = (x, y, array) => {
-	const tamanio = 50;
 
 	const mosaico = document.createElement('div');
 
@@ -179,16 +192,17 @@ const generarMosaicos = (x, y, array) => {
 	mosaico.dataset.x = x;
 	mosaico.dataset.y = y;
 	mosaico.innerHTML = array[x][y];
-	mosaico.style.top = `${x * tamanio}px`;
-	mosaico.style.left = `${y * tamanio}px`;
+	mosaico.style.top = `${x * tamanioMosaico}px`;
+	mosaico.style.left = `${y * tamanioMosaico}px`;
 	return mosaico;
 };
 
-// REVISAR PARAMETROS DE MÁS (filas, columnas, items)
+//Llevar la grilla ya creada en el punto anterior al HTML
+const generarGrillaEnHTML = () => {
 
-const generarGrillaEnHTML = (columnas) => {
-	const anchoDeGrilla = 50 * columnas;
-	grillaHTML.style.width = `${anchoDeGrilla}px`;
+	grillaHTML.style.width = `450px`;
+	grillaHTML.style.length = `450px`;
+
 	const listadeItems = grilla;
 
 	for (let i = 0; i < listadeItems.length; i++) {
@@ -198,10 +212,6 @@ const generarGrillaEnHTML = (columnas) => {
 	}
 	mosaicos = document.getElementsByClassName('mosaico');
 };
-
-
-//Establecer la cantidad de puntos que hay en el marcador:
-puntos = 0;
 
 // --------SELECCIONAR UN MOSAICO
 
@@ -268,7 +278,6 @@ const reemplazarMatches = () => {
 
 
 // -----------CUENTA REGRESIVA
-let tiempoRestante = 30;
 const cuentaRegresiva = () => {
 	tiempoRestanteHTML.textContent = `0:${tiempoRestante}`;
 
@@ -286,7 +295,6 @@ const cuentaRegresiva = () => {
 //----------PROCESO DE INTERCAMBIO DE MOSAICOS SELECCIONADOS
 
 const intercambiarMosaicos = (elem1, elem2) => {
-	const tamanio = 50;
 
 	const datax1 = Number(elem1.dataset.x);
 	const datax2 = Number(elem2.dataset.x);
@@ -299,10 +307,10 @@ const intercambiarMosaicos = (elem1, elem2) => {
 	grilla[datax2][datay2] = variableTemporal;
 
 	// modifico la grilla en HTML
-	elem1.style.top = `${datax2 * tamanio}px`;
-	elem2.style.top = `${datax1 * tamanio}px`;
-	elem1.style.left = `${datay2 * tamanio}px`;
-	elem2.style.left = `${datay1 * tamanio}px`;
+	elem1.style.top = `${datax2 * tamanioMosaico}px`;
+	elem2.style.top = `${datax1 * tamanioMosaico}px`;
+	elem1.style.left = `${datay2 * tamanioMosaico}px`;
+	elem2.style.left = `${datay1 * tamanioMosaico}px`;
 
 	elem1.dataset.x = datax2;
 	elem2.dataset.x = datax1;
