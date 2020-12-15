@@ -21,6 +21,12 @@ Nevertheless, this is an ongoing project, which means that more sections and fun
 ## Considerations
 This is only our third coding project as well as my first time working in teams. We have a long way to go in order to improve the quality of our code and any feedback will make us feel accompanied on this journey, as long as it comes from a place of respect.
 
+## Authors
+[Ana Laclau]()
+[Agustina Ardisana]()
+[Angélica Sofía Pagés Burgos]()
+[Caro Krstulovich]()
+
 ### 🖱️[link coming soon]() 
 
 # [🇦🇷ESP] 🎮 Match 3 🎮 (🚧 en construcción 🚧)
@@ -46,5 +52,11 @@ Sin embargo, este es un proyecto en curso por lo que a medida que avancemos en l
 
 ## Consideraciones
 Esta es nuestro tercer proyecto de codeado así como nuestra primera vez trabajando en equipos. Tenemos un gran camino por delante para mejorar la calidad de nuestro código y todo feedback nos ayudará a sentirnos acompañadas en el recorrido, siempre que venga desde un lugar de respeto.
+
+## Autoras
+[Ana Laclau]()
+[Agustina Ardisana]()
+[Angélica Sofía Pagés Burgos]()
+[Carolina Krstulovich]()
 
 ### 🖱️[link muy pronto]() 
