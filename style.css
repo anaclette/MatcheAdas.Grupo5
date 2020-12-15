@@ -18,16 +18,6 @@
 	}
 }
 
-.animacion-desaparecer {
-	animation-name: shrink;
-	animation-duration: 500ms;
-}
-
-.animacion-aparecer {
-	animation-name: grow;
-	animation-duration: 500ms;
-}
-
 body {
 	background-image: url(./imagenes/background2.jpg);
 	display: flex;
@@ -107,14 +97,6 @@ body {
 	justify-content: center;
 }
 
-/* .estilo-botones-barra{
-
-} */
-
-/* .botones-barra{
-
-} */
-
 .botones {
 	background-color: transparent;
 	border: none;
@@ -125,11 +107,12 @@ body {
 	position: relative;
 }
 
-#grilla > div {
+.mosaico {
 	position: absolute;
 	cursor: pointer;
+	transition: 0.3s;
 	font-size: 25px; /* puse 25px para que el tamanio original no se vea tan chiquito, pero es a modificar a criterio de la maquetadora!
-
+	
 	/* width: 50px;
     height: 50px;
     border: 1px solid black;
@@ -174,6 +157,20 @@ body {
 	display: flex;
 }
 
+#boton-ayuda:hover {
+	cursor: pointer;
+}
+
+#boton-restart {
+	transition: 0.2s;
+}
+
+#boton-restart:hover {
+	transform: rotate(180deg);
+	cursor: pointer;
+
+}
+
 /*  CLASE PARA BORRAR BARRA INFORMATIVA
 .informacion-hidden{
     display: none;
@@ -190,6 +187,13 @@ body {
 	display: none;
 }
 
-/* .no-scroll {
-  position: fixed;
-} */
+.animacion-desaparecer {
+	animation-name: shrink;
+	animation-duration: 500ms;
+}
+
+.animacion-aparecer {
+	animation-name: grow;
+	animation-duration: 500ms;
+}
+
