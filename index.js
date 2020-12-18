@@ -187,7 +187,7 @@ const definirTamanioGrilla = () => {
 	const ventanaTamanioMobile = window.matchMedia("(max-width: 500px)")
     if (ventanaTamanioMobile.matches) {
 		console.log('achicar')
-		tamanioGrilla = 250
+		tamanioGrilla = 380
 		//mosaico.style.fontSize = `1.5rem`
 	}
 	else {
@@ -219,6 +219,8 @@ const generarMosaicos = (x, y, array) => {
 	mosaico.innerHTML = array[x][y];
 	mosaico.style.top = `${x * tamanioMosaico}px`;
 	mosaico.style.left = `${y * tamanioMosaico}px`;
+	mosaico.style.width = `${tamanioMosaico}px`;
+	mosaico.style.height = `${tamanioMosaico}px`;
 	return mosaico;
 };
 

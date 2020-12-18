@@ -69,6 +69,9 @@ i {
 	cursor: pointer;
 	transition: 0.3s;
 	font-size: 2rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .dialogo > p {
@@ -127,7 +130,7 @@ i {
 .matcheadas {
 	font-size: 2rem;
 	letter-spacing: 2px;
-	margin: 8px;
+	margin: 25px 8px;
 	font-family: "Cinzel Decorative", cursive;
 	color: rgb(143, 29, 48);
 	text-shadow: 10px 8px 12px #fbf9f9;
@@ -181,8 +184,8 @@ i {
 	border-radius: 8px;
 	box-sizing: border-box;
 	/* ---------------------Mejorar esto para que no quede hardcodeado!!!!--------------- */
-	width: 470px;
-	height: 470px;
+	width: 480px;
+	height: 480px;
 	/* ---------------------Mejorar esto para que no quede hardcodeado!!!!--------------- */
 }
 
@@ -233,15 +236,23 @@ i {
 		max-width: 50%;
 		width: 80%;
 	}
+
+	.boton {
+		font-size: revert;
+	}
 }
 
 @media (max-width:500px) {
     .fondo-negro {
-        max-width: 400px;
-        height: 400px;
+        max-width: 390px;
+        height: 390px;
 	}
 
 	.dialogo {
 		width: 80%;
+	}
+
+	.mosaico {
+		font-size: 1.5rem;
 	}
 }
