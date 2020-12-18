@@ -54,6 +54,7 @@ const cerrarModal = () => {
 //Abrir dialogo de bienvenida
 window.onload = () => {
 	dialogoBienvenida.classList.remove('hidden');
+	definirTamanioGrilla()
 };
 
 //abrir boton ayuda
@@ -178,6 +179,20 @@ const generarGrilla = (filas, columnas) => {
 
 	return grilla;
 };
+
+//Definir tamanio de la grilla de acuerdo al tamanio de la pantalla (responsive)
+//let tamanioGrilla = 0
+
+const definirTamanioGrilla = () => {
+	const ventanaTamanioMobile = window.matchMedia("(max-width: 500px)")
+    if (ventanaTamanioMobile.matches) {
+        console.log('achicar')
+	}
+	else {
+		console.log('agrandar')
+	}
+	//return tamanioGrilla
+}
 
 //Definir tamanio de los mosaicos de acuerdo a la dificultad elegida
 const definirTamanioMosaico = (columnas) => {

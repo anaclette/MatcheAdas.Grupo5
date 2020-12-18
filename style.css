@@ -60,7 +60,7 @@ body {
 .grilla {
 	display: flex;
 	flex-wrap: wrap;
-	background-color: rgba(25, 0, 0, 0.5);
+	
 }
 
 .matcheadas {
@@ -151,10 +151,6 @@ body {
 	cursor: pointer;
 	background-color: black;
 	margin-left: 5px;
-}
-
-.contenedor-cuenta-regresiva {
-	display: flex;
 }
 
 #boton-ayuda:hover {
