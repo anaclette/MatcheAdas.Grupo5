@@ -44,7 +44,7 @@
             <p>Puntaje Obtenido: <span id="puntaje-obtenido"></span></p>
             <div class="dialogo-botones">
                 <button class="boton" id="boton-nuevo-juego">Nuevo Juego</button>
-                <button class="boton" id="boton-reiniciar-juego">Reiniciar Juego</button>
+                <button class="boton" id="boton-reiniciar-juego">Reiniciar</button>
             </div>
         </div>
 
@@ -52,10 +52,12 @@
             <h2>Reiniciar Juego?</h2>
             <p>Perderás todo tu puntaje acumulado!</p>
             <div class="dialogo-botones">
-                <button class="boton" id="boton-cancelar">Cancelar</button>
+                <button class="boton boton-cancelar" id="boton-cancelar">Cancelar</button>
                 <button class="boton" id="boton-nuevo-juego">Nuevo Juego</button>
             </div>
         </div>
+
+
     </div>
 
     <div class="estructura">
@@ -78,17 +80,16 @@
                     <i class="fas fa-redo-alt"></i>
                 </button>
             </div>
-
         </div>
 
-            <div id="grilla" class="grilla"></div>
+        <div id="grilla" class="fondo-negro"></div>
 
         <div class="contenedor-cuenta-regresiva">
-            <i id="icono-reloj" class="fas fa-hourglass-half"></i>
+            <i class="fas fa-hourglass-half"></i>
             <p class="cuenta-regresiva" id="tiempo-restante">0:00</p>
         </div>
-    
     </div>
+
 
     <script src="index.js"></script>
 </body>
