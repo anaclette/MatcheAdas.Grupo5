@@ -20,13 +20,22 @@
 }
 
 body {
-	background-image: url(./imagenes/background2.jpg);
 	display: flex;
-	background-size: cover;
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
 	margin: 0;
+}
+
+.background{
+	display: flex;
+	background-image: url(./imagenes/background2.jpg);
+	background-size:cover;
+	user-select: none;
+	background-repeat:no-repeat;
+	height: 100vh;
+	width: 100%;
+	justify-content: center;
 }
 
 #overlay {
