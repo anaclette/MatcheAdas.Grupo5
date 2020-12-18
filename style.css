@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel+Decorative:wght@700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bungee&family=Bungee+Outline&family=Montserrat:wght@100&display=swap');
 
 @keyframes shrink {
 	from {
@@ -22,64 +24,95 @@ body {
 	background-image: url(./imagenes/background2.jpg);
 	display: flex;
 	background-size: cover;
+	/* background-position-x: 30%;
 	background-position-x: 30%;
-	background-position-x: 30%;
-	user-select: none;
-	background-repeat: no-repeat;
+	background-repeat: no-repeat; */
 	background-size: cover;
-	font-family: "Bebas Neue", cursive;
 	justify-content: center;
+	flex-direction: column;
+	margin: 0;
+}
+
+i {
+	color: white;
+}
+
+.dialogo > h2,
+.dialogo > p {
+	font-family: 'Montserrat', sans-serif;
 }
 
 #overlay {
 	background-color: rgba(0, 0, 0, 0.5);
-	width: 100%;
-	height: 100%;
+	right: 0;
+	bottom: 0;
 	top: 0;
 	left: 0;
-	position: fixed;
+	position: absolute;
 	z-index: 1;
-}
-
-.estructura {
-	justify-content: center;
-	align-items: center;
-	background-size: cover;
-	background-position-y: 30%;
-	background-position-x: 30%;
-	padding: 0 10px;
-	background-position-x: 30%;
-	padding: 0 10px;
-	user-select: none;
-	background-repeat: no-repeat;
-	background-size: cover;
 }
 
 /* ---------------- ESTILOS GRILLA ------------------ */
 
-.grilla {
+.estructura {
 	display: flex;
-	flex-wrap: wrap;
-	background-color: rgba(25, 0, 0, 0.5);
+	flex-direction: column;
+	align-items: center;
+	/* height: 100%; */
+}
+
+.fondo-negro {
+	/* background-color: rgb(66, 62, 62);
+	opacity: 0.5;
+	border: 2px white solid;
+	border-radius: 8px;
+	box-sizing: content-box; */
 }
 
 .matcheadas {
-	text-align: center;
-	font-size: 40px;
-	margin-top: 32px;
-	margin-bottom: 16px;
+	font-size: 2rem;
+	letter-spacing: 2px;
+	margin: 8px;
 	font-family: "Cinzel Decorative", cursive;
+	color: rgb(143, 29, 48);
+	text-shadow: 10px 8px 12px #fbf9f9;
 }
 
 .puntos {
 	display: flex;
+	padding: 5px;
 }
 
 .barra {
+	width: 40%;
+	max-height: 15%;
 	display: flex;
-	background-color: rgba(0, 0, 0, .5);
+	font-family: 'Fredericka the Great', cursive;
+	color: white;
+	background-color: rgb(238, 52, 83);
+	margin: 7px;
+	border-radius: 8px;
+	letter-spacing: 2px;
+	font-size: 1.5rem;
+	border: 2px white solid;
 	justify-content: space-between;
 	align-items: center;
+}
+
+.contenedor-cuenta-regresiva {
+	display: flex;
+	background-color: rgb(238, 52, 83);
+	border-radius: 8px;
+	border: white solid 2px;
+	color: white;
+	font-family: 'Fredericka the Great', cursive;
+	align-items: center;
+	padding: 0px 10px;
+	margin-top: 33%;
+}
+
+.fa-hourglass-half {
+	padding-right: 5px;
 }
 
 .juego-terminado {
@@ -87,20 +120,18 @@ body {
 	background-color: brown;
 }
 
-.dialogo-dificultad {
-	display: flex;
-	background-color: coral;
-}
-
 .dialogo-botones {
 	display: flex;
 	justify-content: center;
+	padding: 5%;
 }
 
 .botones {
-	background-color: transparent;
 	border: none;
-	font-size: 20px;
+	background-color: rgb(238, 52, 83);
+	color: white;
+	font-family: 'Fredericka the Great', cursive;
+	font-size: 1.5rem;
 }
 
 #grilla {
@@ -111,19 +142,12 @@ body {
 	position: absolute;
 	cursor: pointer;
 	transition: 0.3s;
-	font-size: 25px; /* puse 25px para que el tamanio original no se vea tan chiquito, pero es a modificar a criterio de la maquetadora!
-	
-	/* width: 50px;
-    height: 50px;
-    border: 1px solid black;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    align-items: center; */
+	font-size: 2rem;
 }
 
-#dialogo-bienvenida {
-	width: 500px;
+.dialogo > p {
+	font-weight: bold;
+	color: rgba(0, 0, 0, 0.876);
 }
 
 .dialogo {
@@ -131,30 +155,40 @@ body {
 	background-color: #fafafa;
 	top: 50%;
 	left: 50%;
-	width: 300px;
+	width: 35%;
+	padding: 3px;
 	text-align: center;
 	border-radius: 7px;
 	margin: 20px;
-	display: inline-block;
 	z-index: 2;
 	transform: translate(-50%, -50%);
-	text-align: center;
 }
 
 .boton {
-	color: #fafafa;
 	border: none;
-	box-shadow: none;
 	border-radius: 5px;
-	padding: 10px 24px;
-	margin: 0;
+	padding: 10px 10px;
+
 	cursor: pointer;
-	background-color: black;
-	margin-left: 5px;
+	margin: 3%;
+	background-color: rgb(238, 52, 83);
+	color: white;
+	font-family: 'Fredericka the Great', cursive;
+	font-size: 1.5rem;
 }
 
-.contenedor-cuenta-regresiva {
-	display: flex;
+.boton:hover,
+.botones:hover {
+	background-color: rgb(187, 84, 101);
+}
+
+.boton-cancelar {
+	background-color: rgb(206, 198, 198);
+	color: black;
+}
+
+.boton-cancelar:hover {
+	background-color: rgb(156, 149, 149);
 }
 
 #boton-ayuda:hover {
@@ -168,7 +202,6 @@ body {
 #boton-restart:hover {
 	transform: rotate(180deg);
 	cursor: pointer;
-
 }
 
 /*  CLASE PARA BORRAR BARRA INFORMATIVA
@@ -179,8 +212,8 @@ body {
 /*Comienzan clases especiales*/
 
 .seleccionado {
-	border: 2px solid rgb(65, 59, 59);
-	border-radius: 15px;
+	border: 1px solid rgb(65, 59, 59);
+	border-radius: 10px;
 }
 
 .hidden {
@@ -196,4 +229,3 @@ body {
 	animation-name: grow;
 	animation-duration: 500ms;
 }
-
