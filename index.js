@@ -30,7 +30,7 @@ let grilla = [];
 let tamanioMosaico = 0 //Para funcion definirTamanioMosaico
 let puntos = 0 //Establecer la cantidad de puntos que hay en el marcador:
 let tiempoRestante = 30; //Para la funcion cuentaRegresiva
-
+let tamanioGrilla = 0 //Para cambiar tamanio de la grilla segun el dispositivo
 
 
 // ------------COMPORTAMIENTO GENERAL DEL OVERLAY
@@ -180,23 +180,33 @@ const generarGrilla = (filas, columnas) => {
 	return grilla;
 };
 
-//Definir tamanio de la grilla de acuerdo al tamanio de la pantalla (responsive)
-//let tamanioGrilla = 0
+//Definir tamanio de la grilla en HTML de acuerdo al tamanio de la pantalla (responsive)
 
+//Media query para reconocer el tamanio de la pantalla onload
 const definirTamanioGrilla = () => {
 	const ventanaTamanioMobile = window.matchMedia("(max-width: 500px)")
     if (ventanaTamanioMobile.matches) {
-        console.log('achicar')
+		console.log('achicar')
+		tamanioGrilla = 250
+		//mosaico.style.fontSize = `1.5rem`
 	}
 	else {
 		console.log('agrandar')
+		tamanioGrilla = 470
 	}
-	//return tamanioGrilla
+	return tamanioGrilla
+}
+
+//Conversion a px y almacenamiento en variable para reusar
+let anchoGrillaHTML = definirTamanioGrilla()
+
+const definirAnchoDeGrilla = () => {
+	grillaHTML.style.width = `${anchoGrillaHTML}px`
 }
 
 //Definir tamanio de los mosaicos de acuerdo a la dificultad elegida
 const definirTamanioMosaico = (columnas) => {
-	tamanioMosaico = 450 / columnas //--------BUSCAR LA FORMA DE NO HARDCODEAR ESTE NUMERO--------
+	tamanioMosaico = anchoGrillaHTML / columnas
 }
 
 const generarMosaicos = (x, y, array) => {
@@ -214,9 +224,8 @@ const generarMosaicos = (x, y, array) => {
 
 //Llevar la grilla ya creada en el punto anterior al HTML
 const generarGrillaEnHTML = () => {
-
-	grillaHTML.style.width = `450px`;
-	grillaHTML.style.length = `450px`;
+	
+	definirTamanioGrilla()
 
 	const listadeItems = grilla;
 
