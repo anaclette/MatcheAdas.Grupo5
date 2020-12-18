@@ -23,11 +23,8 @@ body {
 	background-image: url(./imagenes/background2.jpg);
 	display: flex;
 	background-size: cover;
-	/* background-position-x: 30%;
-	background-position-x: 30%;
-	background-repeat: no-repeat; */
-	background-size: cover;
 	justify-content: center;
+	align-items: center;
 	flex-direction: column;
 	margin: 0;
 }
@@ -38,7 +35,7 @@ body {
 	bottom: 0;
 	top: 0;
 	left: 0;
-	position: absolute;
+	position: fixed;
 	z-index: 1;
 }
 
@@ -46,7 +43,7 @@ i {
 	color: white;
 }
 
-.dialogo>h2, .dialogo>p {
+.dialogo > h2, .dialogo>p {
 	font-family: 'Montserrat', sans-serif;
 }
 
@@ -61,7 +58,6 @@ i {
 	background-color: rgb(238, 52, 83);
 	color: white;
 	font-family: 'Fredericka the Great', cursive;
-	font-size: 1.5rem;
 }
 
 #grilla {
@@ -75,7 +71,7 @@ i {
 	font-size: 2rem;
 }
 
-.dialogo>p {
+.dialogo > p {
 	font-weight: bold;
 	color: rgba(0, 0, 0, 0.876);
 }
@@ -125,10 +121,7 @@ i {
 }
 
 .estructura {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	/* height: 100%; */
+	max-width: 500px;
 }
 
 .matcheadas {
@@ -138,17 +131,14 @@ i {
 	font-family: "Cinzel Decorative", cursive;
 	color: rgb(143, 29, 48);
 	text-shadow: 10px 8px 12px #fbf9f9;
-}
-
-.puntos {
-	display: flex;
-	padding: 5px;
+	text-align: center;
 }
 
 .barra {
-	width: 40%;
 	max-height: 15%;
 	display: flex;
+	justify-content: space-between;
+	align-items: center;
 	font-family: 'Fredericka the Great', cursive;
 	color: white;
 	background-color: rgb(238, 52, 83);
@@ -157,8 +147,19 @@ i {
 	letter-spacing: 2px;
 	font-size: 1.5rem;
 	border: 2px white solid;
-	justify-content: space-between;
-	align-items: center;
+}
+
+.puntos {
+	display: flex;
+	padding: 5px;
+}
+
+.puntos > p {
+	padding-right: 10px;
+}
+
+.estilo-botones-barra > button {
+	font-size: x-large;
 }
 
 #boton-ayuda:hover {
@@ -187,14 +188,17 @@ i {
 
 .contenedor-cuenta-regresiva {
 	display: flex;
+	align-items: center;
+	justify-content: center;
 	background-color: rgb(238, 52, 83);
 	border-radius: 8px;
 	border: white solid 2px;
 	color: white;
 	font-family: 'Fredericka the Great', cursive;
-	align-items: center;
 	padding: 0px 10px;
-	margin-top: 15px;
+	/* margin-top: 15px; */
+	max-width: 100px;
+	margin: 20px auto 0;
 }
 
 .fa-hourglass-half {
@@ -220,4 +224,24 @@ i {
 .animacion-aparecer {
 	animation-name: grow;
 	animation-duration: 500ms;
+}
+
+/* Comienza responsive */
+@media (max-width:1000px) {
+	.dialogo {
+		width: 60%;
+		max-width: 50%;
+		width: 80%;
+	}
+}
+
+@media (max-width:500px) {
+    .fondo-negro {
+        max-width: 400px;
+        height: 400px;
+	}
+
+	.dialogo {
+		width: 80%;
+	}
 }
